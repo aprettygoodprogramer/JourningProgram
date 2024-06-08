@@ -71,7 +71,7 @@ void  retreiveData()
 		
 		if (line == JournalHolder.DateLookingFor && FoundDate == false)
 		{
-			result += JournalHolder.DateLookingFor;
+			
 			result += "\n";
 			result += "\n";
 			FoundDate = true;
