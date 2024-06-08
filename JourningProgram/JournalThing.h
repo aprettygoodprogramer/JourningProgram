@@ -2,35 +2,18 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <chrono>
+
 #include <thread>
 struct JournalHolder
 {
 	std::string MainText;
 	bool WriteToFile;
 	bool RightToFile;
-	std::string Date;
+	std::string Date = "DEEZ NUTS";
+	std::string DateLookingFor;
+	std::string result;
 };
 
 struct JournalHolder JournalHolder ;
 
-void saveToFile()
-{
-
-
-	std::ofstream outFile("Text.txt");
-	if (outFile.is_open()) {
-		outFile << JournalHolder.MainText;
-	}
-	outFile.close();
-
-
-}
-
-
-
-
-void RunSaveToFile()
-{
-	std::thread t1(saveToFile);
-	t1.detach();
-}

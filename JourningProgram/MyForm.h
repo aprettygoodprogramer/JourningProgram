@@ -4,6 +4,7 @@
 
 
 void RunSaveToFile();
+void RunRetreiveData();
 namespace JourningProgram {
 
 	using namespace System;
@@ -44,6 +45,12 @@ namespace JourningProgram {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ Epic;
+
+	private: System::Windows::Forms::RichTextBox^ richTextBox3;
+
+
+
 
 	protected:
 
@@ -66,6 +73,8 @@ namespace JourningProgram {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->Epic = (gcnew System::Windows::Forms::Button());
+			this->richTextBox3 = (gcnew System::Windows::Forms::RichTextBox());
 			this->SuspendLayout();
 			// 
 			// dateTimePicker1
@@ -91,6 +100,7 @@ namespace JourningProgram {
 			this->dateTimePicker2->Name = L"dateTimePicker2";
 			this->dateTimePicker2->Size = System::Drawing::Size(200, 20);
 			this->dateTimePicker2->TabIndex = 2;
+			this->dateTimePicker2->ValueChanged += gcnew System::EventHandler(this, &MyForm::dateTimePicker2_ValueChanged);
 			// 
 			// label1
 			// 
@@ -123,11 +133,33 @@ namespace JourningProgram {
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
+			// Epic
+			// 
+			this->Epic->Location = System::Drawing::Point(652, 398);
+			this->Epic->Name = L"Epic";
+			this->Epic->Size = System::Drawing::Size(139, 126);
+			this->Epic->TabIndex = 6;
+			this->Epic->Text = L"Retrive the Data!";
+			this->Epic->UseVisualStyleBackColor = true;
+			this->Epic->Click += gcnew System::EventHandler(this, &MyForm::Epic_Click);
+			// 
+			// richTextBox3
+			// 
+			this->richTextBox3->Location = System::Drawing::Point(563, 120);
+			this->richTextBox3->Name = L"richTextBox3";
+			this->richTextBox3->ReadOnly = true;
+			this->richTextBox3->Size = System::Drawing::Size(313, 272);
+			this->richTextBox3->TabIndex = 8;
+			this->richTextBox3->Text = L" ";
+			this->richTextBox3->TextChanged += gcnew System::EventHandler(this, &MyForm::richTextBox3_TextChanged);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(934, 589);
+			this->Controls->Add(this->richTextBox3);
+			this->Controls->Add(this->Epic);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
@@ -168,7 +200,26 @@ private: System::Void dateTimePicker1_ValueChanged(System::Object^ sender, Syste
 
 		String^ theDate = dateTimePicker1->Value.ToString("yyyy-MM-dd");
 		std::string TheDateString = SystemStringToStdString(theDate);
+		JournalHolder.Date = TheDateString;
 	
 }	
+private: System::Void dateTimePicker2_ValueChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+}
+private: System::Void Epic_Click(System::Object^ sender, System::EventArgs^ e) {
+	RunRetreiveData();
+	System::String^ mySystemString = msclr::interop::marshal_as<System::String^>(JournalHolder.result);
+	richTextBox3->AppendText(mySystemString);
+	richTextBox3->Update();
+}
+private: System::Void richTextBox3_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	
+	
+}	
+private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
