@@ -204,19 +204,27 @@ private: System::Void dateTimePicker1_ValueChanged(System::Object^ sender, Syste
 	
 }	
 private: System::Void dateTimePicker2_ValueChanged(System::Object^ sender, System::EventArgs^ e) {
+	dateTimePicker2->Update();
+	String^ theDate = dateTimePicker2->Value.ToString("yyyy-MM-dd");
+	std::string TheDateString = SystemStringToStdString(theDate);
+	JournalHolder.DateLookingFor = TheDateString;
 }
 private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
 }
 private: System::Void Epic_Click(System::Object^ sender, System::EventArgs^ e) {
+	dateTimePicker2->Update();
 	RunRetreiveData();
 	System::String^ mySystemString = msclr::interop::marshal_as<System::String^>(JournalHolder.result);
 	richTextBox3->AppendText(mySystemString);
+	
+	richTextBox3->Update();
+	richTextBox3->ScrollToCaret();
 	richTextBox3->Update();
 }
 private: System::Void richTextBox3_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-	
+ 	
 	
 }	
 private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {

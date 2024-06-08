@@ -24,7 +24,7 @@ void saveToFile()
 	std::ofstream outFile("Text.txt", std::ios::app);
 	if (outFile.is_open()) {
 
-
+		outFile << "\n";
 		if (JournalHolder.Date == "DEEZ NUTS")
 		{
 			auto currentTime = std::chrono::system_clock::now();
@@ -69,14 +69,17 @@ void  retreiveData()
 	std::string line;
 	while (std::getline(file, line)) {
 		
-		if (line == JournalHolder.DateLookingFor)
+		if (line == JournalHolder.DateLookingFor && FoundDate == false)
 		{
-			result + JournalHolder.DateLookingFor;
+			result += JournalHolder.DateLookingFor;
+			result += "\n";
+			result += "\n";
 			FoundDate = true;
 		}
 		if (FoundDate == true)
 		{
-			result + line;
+			result += line;
+			result += "\n";
 		}
 		if (FoundDate == true && line == "..")
 		{
